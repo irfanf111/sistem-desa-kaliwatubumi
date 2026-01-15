@@ -134,7 +134,7 @@
             <p>Kaliwatubumi, {{ $surat->tanggal_surat->isoFormat('D MMMM Y') }}</p>
             <p>Kepala Desa,</p>
             <br><br><br>
-            <p><b>( NAMA KADES )</b></p>
+            <p><b>Sujatmiko,S.E.</b></p>
         </div>
     </div>
 

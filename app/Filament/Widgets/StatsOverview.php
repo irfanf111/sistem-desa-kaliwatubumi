@@ -4,6 +4,7 @@ namespace App\Filament\Widgets;
 
 use App\Models\Penduduk;
 use App\Models\SuratKeluar;
+use App\Models\SuratMasuk; // <--- JANGAN LUPA IMPORT INI
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -12,24 +13,24 @@ class StatsOverview extends BaseWidget
     protected function getStats(): array
     {
         return [
-            // Kotak 1: Total Penduduk
-            Stat::make('Total Penduduk', Penduduk::count())
-                ->description('Warga terdaftar di sistem')
-                ->descriptionIcon('heroicon-m-users')
-                ->color('primary'), // Warna biru
-
-            // Kotak 2: Surat Keluar Bulan Ini
+            // KARTU 1: SURAT KELUAR (Pelayanan)
             Stat::make('Surat Keluar (Bulan Ini)', SuratKeluar::whereMonth('tanggal_surat', now()->month)->count())
-                ->description('Peningkatan layanan')
+                ->description('Layanan warga bulan ini')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
-                ->chart([7, 2, 10, 3, 15, 4, 17]) // Hiasan grafik garis kecil
-                ->color('success'), // Warna hijau
+                ->chart([7, 2, 10, 3, 15, 4, 17])
+                ->color('success'),
 
-            // Kotak 3: Total Semua Surat
-            Stat::make('Total Arsip Surat', SuratKeluar::count())
-                ->description('Total surat yang pernah dicetak')
-                ->descriptionIcon('heroicon-m-document-duplicate')
-                ->color('warning'), // Warna kuning
+            // KARTU 2: SURAT MASUK (Arsip) - BARU
+            Stat::make('Surat Masuk (Total)', SuratMasuk::count())
+                ->description('Total arsip dari dinas luar')
+                ->descriptionIcon('heroicon-m-inbox-arrow-down')
+                ->color('primary'),
+
+            // KARTU 3: TOTAL PENDUDUK
+            Stat::make('Total Penduduk', Penduduk::count())
+                ->description('Data warga terdaftar')
+                ->descriptionIcon('heroicon-m-users')
+                ->color('warning'),
         ];
     }
 }
